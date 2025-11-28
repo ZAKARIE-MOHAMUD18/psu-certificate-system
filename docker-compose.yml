@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_URL=http://localhost:5000/api
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/app
+      - sqlite_data:/app/data
+    environment:
+      - FLASK_ENV=development
+      - DATABASE_URL=sqlite:///data/database.sqlite
+      - SECRET_KEY=dev-secret-key
+      - CORS_ORIGINS=http://localhost:3000
+
+volumes:
+  sqlite_data:
