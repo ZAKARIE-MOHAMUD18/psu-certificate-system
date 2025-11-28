@@ -28,7 +28,7 @@ jobs:
           cd frontend
           npm run build
         env:
-          VITE_API_URL: https://psu-certificate-backend.onrender.com/api
+          VITE_API_URL: https://psu-certificate-system.onrender.com/api
       
       - name: Deploy to Vercel
         uses: vercel/action@v1
